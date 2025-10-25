@@ -16,7 +16,7 @@ export default function ForgotPasswordModal({ onClose }) {
     }
 
     try {
-      const response = await fetch("http://localhost:6060/api/forgot", {
+      const response = await fetch("https://sternic-backend.onrender.com/api/forgot", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ username, password: newPassword }),
