@@ -30,7 +30,6 @@ export default function ForgotPasswordModal({ onClose }) {
         setUsername("");
         setNewPassword("");
 
-        // Close modal after a short delay
         setTimeout(() => {
           setMessage("");
           onClose();
