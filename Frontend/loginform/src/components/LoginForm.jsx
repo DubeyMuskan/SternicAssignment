@@ -18,20 +18,23 @@ export default function LoginForm() {
 
   const BLOCK_DURATION = 20 * 60 * 1000;
 
+  const startBlockTimer = (blockedUntil) => {
+    setIsBlocked(true);
+    const interval = setInterval(() => {
+      const remaining = Math.max(0, blockedUntil - Date.now());
+      setRemainingTime(remaining);
+      if (remaining <= 0) {
+        setIsBlocked(false);
+        localStorage.removeItem("blockedUntil");
+        clearInterval(interval);
+      }
+    }, 1000);
+  };
+
   useEffect(() => {
     const blockedUntil = localStorage.getItem("blockedUntil");
     if (blockedUntil && Date.now() < Number(blockedUntil)) {
-      setIsBlocked(true);
-      const interval = setInterval(() => {
-        const remaining = Math.max(0, Number(blockedUntil) - Date.now());
-        setRemainingTime(remaining);
-        if (remaining <= 0) {
-          setIsBlocked(false);
-          localStorage.removeItem("blockedUntil");
-          clearInterval(interval);
-        }
-      }, 1000);
-      return () => clearInterval(interval);
+      startBlockTimer(Number(blockedUntil));
     }
   }, []);
 
@@ -69,8 +72,8 @@ export default function LoginForm() {
         if (newAttempts >= 3) {
           const blockedUntil = Date.now() + BLOCK_DURATION;
           localStorage.setItem("blockedUntil", blockedUntil);
-          setIsBlocked(true);
           setAttempts(0);
+          startBlockTimer(blockedUntil);
         }
       }
     } catch {
