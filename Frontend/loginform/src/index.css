@@ -7,11 +7,11 @@
 html,
 body {
   height: 100%;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI",
-    Roboto, Helvetica, Arial, sans-serif;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
   background-color: #280e0e;
   color: #fff;
   scroll-behavior: smooth;
+  overflow-x: hidden;
 }
 
 #root {
@@ -147,8 +147,8 @@ input:focus {
   color: #f87171;
 }
 
-.error-message {
-  color: #fff;
+.error-message,
+.success-message {
   text-align: center;
   margin-top: 1.5rem;
   font-weight: 500;
@@ -157,13 +157,12 @@ input:focus {
   font-size: 1rem;
 }
 
+.error-message {
+  color: #fff;
+}
+
 .success-message {
   color: #22c55e;
-  text-align: center;
-  margin-top: 1.5rem;
-  font-weight: 500;
-  border-radius: 0.5rem;
-  padding: 1rem;
   font-size: 1.2rem;
 }
 
@@ -192,21 +191,6 @@ input:focus {
   text-align: center;
   border-top: 4px solid #ff2020;
   animation: fadeIn 0.35s ease-in-out;
-  transition: all 0.3s ease;
-}
-
-.modal-content h3 {
-  font-size: 1.8rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: #fff;
-}
-
-.modal-content .modal-desc {
-  font-size: 1rem;
-  color: #ddd;
-  margin-bottom: 2rem;
-  line-height: 1.6;
 }
 
 .modal-content input {
@@ -218,11 +202,6 @@ input:focus {
   color: white;
   margin-bottom: 1.5rem;
   font-size: 1rem;
-  transition: border-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.modal-content input::placeholder {
-  color: #888;
 }
 
 .modal-content input:focus {
@@ -239,24 +218,12 @@ input:focus {
   border: none;
   border-radius: 8px;
   font-weight: 600;
-  letter-spacing: 0.4px;
-  transition: background 0.3s, transform 0.2s;
   font-size: 1.1rem;
 }
 
 .modal-content .btn:hover {
   background-color: #b91c1c;
   transform: translateY(-2px);
-}
-
-.reset-message {
-  margin-top: 1rem;
-  font-size: 1rem;
-  color: #22c55e;
-  background: rgba(34, 197, 94, 0.1);
-  border-radius: 6px;
-  padding: 0.6rem;
-  font-weight: 500;
 }
 
 .close-btn {
@@ -266,7 +233,6 @@ input:focus {
   border: none;
   cursor: pointer;
   font-size: 1rem;
-  transition: color 0.2s ease;
 }
 
 .close-btn:hover {
@@ -289,25 +255,112 @@ input:focus {
 }
 
 @media (max-width: 480px) {
+  html, body {
+    font-size: 14px;
+  }
+
+  #root {
+    padding: 0.8rem;
+    align-items: flex-start;
+  }
+
   .login-card {
-    padding: 2rem 1.5rem;
-    max-width: 90%;
+    padding: 1.2rem 1rem;
+    max-width: 100%;
+    border-radius: 10px;
+    margin-top: 2rem;
   }
 
   h2 {
-    font-size: 1.8rem;
+    font-size: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  label {
+    font-size: 0.9rem;
   }
 
   input {
-    font-size: 0.95rem;
+    font-size: 0.9rem;
+    padding: 0.7rem 0.9rem;
   }
 
   .btn {
     font-size: 1rem;
+    padding: 0.8rem;
+  }
+
+  .forgot-password button {
+    font-size: 0.9rem;
   }
 
   .modal-content {
+    padding: 1.8rem;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  html, body {
+    font-size: 15px;
+  }
+
+  #root {
+    padding: 1.2rem;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .login-card {
+    width: 90%;
+    max-width: 420px;
+    margin: auto;
     padding: 2rem 1.5rem;
-    max-width: 90%;
+    border-radius: 10px;
+  }
+
+  h2 {
+    font-size: 1.7rem;
+    margin-bottom: 2rem;
+  }
+
+  input {
+    font-size: 1rem;
+    padding: 0.9rem 1rem;
+  }
+
+  .btn {
+    font-size: 1.05rem;
+    padding: 0.9rem;
+  }
+
+  .modal-content {
+    max-width: 380px;
+    padding: 2rem 1.5rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .login-card {
+    max-width: 650px;
+    padding: 70px 60px;
+  }
+
+  h2 {
+    font-size: 2.4rem;
+  }
+
+  .btn {
+    font-size: 1.15rem;
+  }
+}
+
+@media (min-width: 1200px) {
+  .login-card {
+    max-width: 600px;
+    padding: 70px 60px;
+  }
+
+  h2 {
+    font-size: 2.5rem;
   }
 }
